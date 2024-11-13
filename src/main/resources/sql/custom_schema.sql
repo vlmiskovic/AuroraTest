@@ -26,7 +26,8 @@ CREATE TABLE if NOT EXISTS `tournaments`
 ,`prize_distributed` TINYINT DEFAULT 0
 ,`dt_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ,`dt_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE current_timestamp
-,PRIMARY KEY (`tournament_id`) USING btree
+,PRIMARY KEY (`tournament_id`) USING btree,
+  CONSTRAINT `tounrament_distribute_prize` CHECK (((`prize_distributed` >= 0) and (`prize_distributed` <= 1)))
 
 )//
 

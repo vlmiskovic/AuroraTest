@@ -18,6 +18,6 @@ public interface PlayerRepository extends JpaRepository<Player,Integer> {
     @Query(value = "update players p set p.account_balance=?1 where p.player_id=?2",nativeQuery = true)
     void updateAccountBalance(Double newBalance,Integer playerId);
 
-    @Query(value="SELECT p.player_id AS player_id,p.player_name AS player_name,p.player_email AS player_email,p.account_balance AS account_balance,p.dt_created AS dt_created,p.dt_updated AS dt_updated ,row_number() over (ORDER BY p.account_balance DESC) AS ranking FROM players p; ", nativeQuery=true)
+    @Query(value="with cte_players AS (SELECT p.player_id AS player_id,p.player_name AS player_name,p.player_email AS player_email,p.account_balance AS account_balance,p.dt_created AS dt_created,p.dt_updated AS dt_updated ,row_number() over (ORDER BY p.account_balance DESC) AS ranking FROM players p) SELECT * FROM cte_players p ORDER BY p.ranking; ", nativeQuery=true)
     List<Map<String, Object>> getPlayersRankedByAccoutnBalance();
 }
