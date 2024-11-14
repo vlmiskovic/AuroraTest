@@ -17,8 +17,15 @@ public class PlayerService {
     private final PlayerRepository playerRepository;
 
     public Optional<Player> getPlayer(Integer player_id){
-        Optional<Player> player=playerRepository.findById(player_id);
-        return  player;
+        try {
+            Optional<Player> player = playerRepository.findById(player_id);
+            if(player.isEmpty()){
+                throw new RuntimeException("Player with this id does not exists");
+            }
+            return player;
+            }catch (Exception e) {
+                throw new ApiExceptions(e.getMessage());
+            }
     }
     public Player createNewPlayer(Player player){
         try { return playerRepository.save(player);
@@ -37,32 +44,29 @@ public class PlayerService {
     }
     public void updateCurrentAccountBalance(Double transaction_value, Integer playerId){
         try {
-            Player np = new Player();
-            Optional<Player> p = playerRepository.findById(playerId);
-            if (p.isPresent()) {
-                np = p.get();
-            } else {
-                return;
+
+            Optional<Player> player = playerRepository.findById(playerId);
+            if(player.isEmpty()) {
+              throw new RuntimeException("Player with this id does not exists");
             }
 
-            double newBalance = np.getAccountBallance() - transaction_value;
-            playerRepository.updateAccountBalance(newBalance, np.getPlayerId());
+            double newBalance = player.get().getAccountBallance() - transaction_value;
+            playerRepository.updateAccountBalance(newBalance, player.get().getPlayerId());
         }catch (Exception e){
-            throw new ApiExceptions("Error ocured while trying to update players account balance");
+            throw new ApiExceptions(e.getMessage());
         }
     }
     public Boolean checkBalance(Integer playerId,Double transaction_value){
-        Player np=new Player();
-        Optional<Player> p = playerRepository.findById(playerId);
-        if(p.isPresent())
+        try {
+        Optional<Player> player = playerRepository.findById(playerId);
+        if(!player.isPresent())
         {
-            np=p.get();
+            throw new RuntimeException("Player with this id does not exists");
         }
-        else{
-            return false;
+        return (player.get().getAccountBallance() -transaction_value)>= 0;
+        }catch (Exception e){
+            throw new ApiExceptions(e.getMessage());
         }
-        double newBalance=np.getAccountBallance() -transaction_value;
-        return newBalance >= 0;
     }
 }
 

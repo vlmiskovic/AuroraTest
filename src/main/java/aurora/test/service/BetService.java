@@ -21,12 +21,12 @@ public class BetService {
             b=betRepository.save(bet);
             playerService.updateCurrentAccountBalance(bet.getAmount(),bet.getPlayer().getPlayerId());
         }else{
-            b=null;
+            throw new RuntimeException("Player does not  have sufficient funds to place bet");
         }
 
         return b;
         }catch (Exception e){
-            throw new ApiExceptions("Error ocured while trying to place bet, please try latter");
+            throw new ApiExceptions("Error occurred while trying to place bet, please try latter:"+e.getMessage());
         }
     }
 }

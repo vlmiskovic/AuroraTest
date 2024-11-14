@@ -14,9 +14,16 @@ public class TournamentService {
 
     private final TournamentRepository tournamentRepository;
     public Optional<Tournament> getTournamentById(Integer tournamentId){
+        try {
+            Optional<Tournament> t = tournamentRepository.findTournamentById(tournamentId);
+            if(t.isEmpty()){
+                throw  new RuntimeException("Tournament with this id does not exists");
+            }
+            return t;
+        }catch (Exception e){
+            throw new ApiExceptions(e.getMessage());
+        }
 
-        Optional<Tournament> t=tournamentRepository.findTournamentById(tournamentId);
-        return t;
     }
 
     public Tournament createNewTournament(Tournament tournament){
