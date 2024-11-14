@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "10a66a0c-f565-4313-b91e-5612afa973ef",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetPlayerRankingReport",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/api/player/getPlayerRanking",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"player",
+						"getPlayerRanking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scoreboard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/api/scoreboard?tournament_id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"scoreboard"
+					],
+					"query": [
+						{
+							"key": "tournament_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPlayerById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/api/player?player_id=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"player"
+					],
+					"query": [
+						{
+							"key": "player_id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTournamentById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/api/tournament?tournament_id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tournament"
+					],
+					"query": [
+						{
+							"key": "tournament_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DistributePrize",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/api/tournament/distributePrize?tournament_id=5",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tournament",
+						"distributePrize"
+					],
+					"query": [
+						{
+							"key": "tournament_id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTournament",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tournamentName\": \"Euro cup\",\r\n    \"prizePool\": 25000.0,\r\n    \"start_date\": \"2024-11-07T23:00:00.000+00:00\",\r\n    \"end_date\": \"2024-11-09T23:00:00.000+00:00\",\r\n    \"finished\": false,\r\n    \"prizeDistributed\": false,\r\n    \"dtCreated\": \"2024-11-10T09:44:02.000+00:00\",\r\n    \"dtUpdated\": \"2024-11-11T08:41:29.000+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/tournament/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tournament",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"player\":{ \"playerId\": 8},\r\n    \"tournament\":{\"tournamentId\": 5},\r\n    \"amount\": 200.0,\r\n    \"odds\": 1.7234,\r\n    \"result\": 1,\r\n    \"dtCreated\": \"2024-11-10T09:44:02.000+00:00\",\r\n    \"dtUpdated\": \"2024-11-11T08:41:29.000+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/bet",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"bet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePlayer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"playerName\": \"Steva\",\r\n    \"playerEmail\": \"steva@test.com\",\r\n    \"accountBallance\": 1000.0,\r\n    \"dtCreated\": \"2024-11-10T11:57:28.000+00:00\",\r\n    \"dtUpdated\": \"2024-11-10T15:38:53.000+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/player/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"player",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

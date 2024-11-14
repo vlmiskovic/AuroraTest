@@ -1,0 +1,1 @@
+with cte_players AS (SELECT p.player_id AS player_id,p.player_name AS player_name,p.player_email AS player_email,p.account_balance AS account_balance,p.dt_created AS dt_created,p.dt_updated AS dt_updated ,row_number() over (ORDER BY p.account_balance DESC) AS ranking FROM players p) SELECT * FROM cte_players p ORDER BY p.ranking; 
